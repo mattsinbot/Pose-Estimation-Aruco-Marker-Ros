@@ -41,3 +41,22 @@ Run the test launch file as,
 ```
 $ roslaunch usb_cam usb_cam-test.launch
 ```
+After running the launch file you should see live image stream from the camera in a new window just opened.
+
+### Calibrate the camera
+Before you track a marker, it is very important that you have your camera properly calibrated to obtain meaningful and correct information. The ROS package to perform camera calibration is named as `image_pipeline` which you first need to clone to your local workspace as following,
+
+```
+$ cd ~/ros_ws_cam/src
+$ git clone https://github.com/ros-perception/image_pipeline
+$ cd ..
+$ catkin_make
+$ source devel/setup.bash
+```
+
+As far as camera calibration method is concerned, there are two types available, `monocular` and `stereo`. We will be using only one camera to track a aruco marker, hence we will be interested in `monoculaar camera calibration method` as instructed following. To run the cameracalibrator.py node for a monocular camera using an 8x6 chessboard with 108mm squares:
+
+```
+$ rosrun camera_calibration cameracalibrator.py --size 8x6 --square 0.108 image:=/usb_cam/image camera:=/usb_cam
+```
+
