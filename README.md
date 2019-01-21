@@ -1,6 +1,8 @@
 # Pose-Estimation-Aruco-Marker-ROS
 6-DoF Pose Estimation using Aruco Markers in ROS
 
+![aruco](aruco_tracking.png)
+
 In order to estimate 6-DoF pose of Aruco markers in ROS, we needto follow the following steps,
 1. Create ROS workspace
 2. Clone usb_cam package
