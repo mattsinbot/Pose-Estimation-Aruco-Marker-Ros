@@ -54,9 +54,27 @@ $ catkin_make
 $ source devel/setup.bash
 ```
 
-As far as camera calibration method is concerned, there are two types available, `monocular` and `stereo`. We will be using only one camera to track a aruco marker, hence we will be interested in `monoculaar camera calibration method` as instructed following. To run the cameracalibrator.py node for a monocular camera using an 8x6 chessboard with 108mm squares:
+As far as camera calibration method is concerned, there are two types available, `monocular` and `stereo`. We will be using only one camera to track a aruco marker, hence we will be interested in `monoculaar camera calibration method` as instructed following. To run the cameracalibrator.py node for a monocular camera using an 8x6 chessboard with 108mm squares: (for details please ckeck [here](http://wiki.ros.org/camera_calibration) and [here](http://wiki.ros.org/camera_calibration/Tutorials/MonocularCalibration))
 
 ```
 $ rosrun camera_calibration cameracalibrator.py --size 8x6 --square 0.108 image:=/usb_cam/image camera:=/usb_cam
 ```
 
+### Clone aruco_ros package
+Now we need the package that has `arucofidmarkers` node to detect and estimate pose of a aruco marker. Details about the package can be found [here](http://wiki.ros.org/aruco_ros). However following the instructions below will make you go on further with little effort.
+
+```
+$ cd ~/ros_ws_cam/src
+$ git clone https://github.com/pal-robotics/aruco_ros
+$ cd ..
+$ catkin_make
+$ source devel/setup.bash
+```
+
+### Create Aruco marker tracking package
+Create a ROS catkin package named `my_aruco_tracker` following the instructions given in [here](http://wiki.ros.org/ROS/Tutorials/CreatingPackage). Make sure to provide following package names as dependencies while creating ROS package,
+
+```
+$ cd ~/ros_ws_cam/src
+$ catkin_create_pkg my_aruco_tracker std_msgs sensor_msgs rospy roscpp usb_cam aruco_ros
+```
