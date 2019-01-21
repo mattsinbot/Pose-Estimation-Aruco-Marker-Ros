@@ -115,7 +115,7 @@ $ source devel/setup.bash
 $ rosrun rqt_gui rqt_gui
 ```
 
-Once the image gui window opens up, select rostopic 
+Once the image gui window opens up, select rostopic */aruco_single/result* from the available rostopics.
 
 If you want to collect data of the maker pose `(x,y,z,qx,qy,qz,qw)` at each time stamp in a `.csv` file run the `writedata.py` node int the fourth terminal,
 
