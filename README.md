@@ -17,7 +17,7 @@ The method to create ROS `catkin` workspace is well described in ROS documentati
 ```
 $ source /opt/ros/melodic/setup.bash
 $ mkdir -p ~/ros_ws_cam/src
-$ cd ~/catkin_ws/
+$ cd ~/ros_ws_cam/
 $ catkin_make
 ```
 Do not forget to `source` the new `*.sh` file now on every time you open a new terminal.
@@ -26,3 +26,18 @@ $ source devel/setup.bash
 ```
 
 ### Clone `usb_cam` package
+The `usb_cam_node` interfaces with USB camera using libusb_cam and publishes images as `sensor_msgs::Image`. By default it uses `/usb_cam` as namespace to publish all image topics. More specifically a topic name should look like `/usb_cam/topic_name`. Floow the instructions below to install the package locally in your workspace.
+
+```
+$ cd ~/ros_ws_cam/src
+$ git clone https://github.com/ros-drivers/usb_cam
+$ cd ..
+$ catkin_make
+$ source devel/setup.bash
+```
+After that we need to connect usb camera to one of the usb port and should run the launch file named `usb_cam-test.launch`. Do not forget to change the value of the parameter `video_device` to `/dev/video1` form `/dev/video0` if you are using a laptop which already has a built-in webcam with it. 
+
+Run the test launch file as,
+```
+$ roslaunch usb_cam usb_cam-test.launch
+```
