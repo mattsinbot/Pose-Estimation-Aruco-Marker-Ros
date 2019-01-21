@@ -77,4 +77,46 @@ Create a ROS catkin package named `my_aruco_tracker` following the instructions 
 ```
 $ cd ~/ros_ws_cam/src
 $ catkin_create_pkg my_aruco_tracker std_msgs sensor_msgs rospy roscpp usb_cam aruco_ros
+$ cd ..
+$ catkin_make
+$ source devel/setup.bash
+```
+After that copy the launch folder from this repository and put it inside the package. Also replace the `src` folder with the one given here to obtain the node called `write_data.py`. You need to create the executable for this node as following,
+
+```
+$ roscd my_aruco_tracker
+$ cd src
+$ chmod u+x writedata.py
+```
+Now you are ready to track the aruco markers. At first open 4 new terminals. In the first terminal type in the following,
+
+```
+$ cd ~/ros_ws_cam
+$ source devel/setup.bash
+$ roslaunch my_aruco_tracker usb_cam_stream_publisher.launch
+```
+
+In the second terminal type in the following,
+
+```
+$ cd ~/ros_ws_cam
+$ source devel/setup.bash
+$ roslaunch my_aruco_tracker aruco_marker_finder.launch
+```
+**Note**: change the markerID value as rwquired. Default value is `701`
+
+In the third terminal terminal type in the following,
+
+```
+$ cd ~/ros_ws_cam
+$ source devel/setup.bash
+$ rosrun rqt_gui rqt_gui
+```
+
+If you want to collect data of the maker pose `(x,y,z,qx,qy,qz,qw)` at each time stamp in a `.csv` file run the `writedata.py` node int the fourth terminal,
+
+```
+$ cd ~/ros_ws_cam
+$ source devel/setup.bash
+$ rosrun my_aruco_tracker write_data.py
 ```
